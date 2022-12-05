@@ -22,7 +22,8 @@ namespace WebApplication05122022_003.Services
                 {"response_type", "code" },
                 {"scope", scope },
                 {"code_challenge", codeChallenge },
-                {"code_challenge_method", "S256" }
+                {"code_challenge_method", "S256" },
+                {"access_type", "ofline" }
             };
             //TODO: helper for creating url ------https://accounts.google.com/o/oauth2/v2/auth?
             //                                    scope = email % 20profile &
@@ -36,7 +37,7 @@ namespace WebApplication05122022_003.Services
 
         public static object ExchangeCodeOnAccessToken(string code, string codeVerifier,string redirectUrl)
         {
-            var oAuthParams = new Dictionary<string, string>()
+            var authParams = new Dictionary<string, string>()
             {
                 { "client_id", ClientId},
                 { "client_secret", ClientSecret},
@@ -46,11 +47,26 @@ namespace WebApplication05122022_003.Services
                 { "redirect_uri", redirectUrl },
             };
 
-            var tokenResult = new object();//TODO: create helper for SendPostRequest<token result tyoe>(tokenServerEndPoint, oAuthParams)
+            var tokenResult = new object();//TODO: create helper for SendPostRequest<token result tyoe>(tokenServerEndPoint, authParams)
             return tokenResult;
         }
-        public static object RefreshToken(string resreshTokent)
+        public static object RefreshToken(string refreshToken)
         {
+            var queryParams = new Dictionary<string, string>()
+            {
+                {"client_id", ClientId},
+                {"client_secret", ClientSecret},
+                {"grant_type", "refresh_token"},
+                {"refresh_token", refreshToken},
+
+            };
+            //TODO: helper for creating url ------https://accounts.google.com/o/oauth2/v2/auth?
+            //                                    scope = email % 20profile &
+            //                                    response_type = code &
+            //                                    state = security_token % 3D138r5719ru3e1 % 26url % 3Dhttps % 3A % 2F % 2Foauth2.example.com % 2Ftoken &
+            //                                    redirect_uri = com.example.app % 3A / oauth2redirect &
+            //                                    client_id = client_id
+            //return someHelper.createUrl(TokenServerEndPoint, queryParams);
             throw new NotImplementedException();
         }
 
