@@ -8,12 +8,12 @@ namespace WebApplication05122022_003.Controllers
     {
         public IActionResult RedirectToOAuthServer()
         {
-            var url = GoogleOAuthService.GenerateRequestUrl();
+            var url = GoogleOAuthService.GenerateRequestUrl("some", "some", "some");
             return Redirect(url);
         }
         public IActionResult Code(string code)
         {
-            var tokenResult = GoogleOAuthService.ExchangeCodeOnAccessToken(code);
+            var tokenResult = GoogleOAuthService.ExchangeCodeOnAccessToken(code, "some", "some");
             return Ok();
         }
 
