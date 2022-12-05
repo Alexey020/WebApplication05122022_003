@@ -6,11 +6,15 @@ namespace WebApplication05122022_003.Controllers
 {
     public class GoogleOAuthController : Controller
     {
-        public static IActionResult RedirectToOAuthServer()
+        public IActionResult RedirectToOAuthServer()
         {
             var url = GoogleOAuthService.GenerateRequestUrl();
-            return RedirectToOAuthServer()
-            throw new NotImplementedException();
+            return Redirect(url);
+        }
+        public IActionResult Code(string code)
+        {
+            var tokenResult = GoogleOAuthService.ExchangeCodeOnAccessToken(code);
+            return Ok();
         }
 
     }
